@@ -35,6 +35,29 @@ class ViewController: UIViewController {
         return titleText
     }()
     
+    private lazy var pagingLayout: PagingCollectionViewLayout = {
+        let layout = PagingCollectionViewLayout()
+        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
+        layout.minimumLineSpacing = 0
+        layout.itemSize = .init(width: 10, height: 10)
+        layout.scrollDirection = .horizontal
+        return layout
+    }()
+    
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: pagingLayout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.decelerationRate = .fast
+        collectionView.backgroundColor = .clear
+        collectionView.register(CustomHeroCollectionViewCell.self, forCellWithReuseIdentifier: CustomHeroCollectionViewCell.identifier)
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        return collectionView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViewConstraints()
@@ -63,6 +86,25 @@ class ViewController: UIViewController {
             make.width.equalTo(self.backgroundScreen.snp.width)
         }
         
+        backgroundScreen.addSubview(collectionView)
+        collectionView.snp.makeConstraints{ (make) -> Void in
+            make.top.equalTo(titleText.snp.bottom)
+            make.width.equalTo(backgroundScreen.snp.width)
+            make.bottom.equalTo(backgroundScreen.snp.bottom)
+        }
+        
     }
     
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
+        
+        return cell
+    }
 }
