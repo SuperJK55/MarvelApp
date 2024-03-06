@@ -10,6 +10,17 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    let heroViewModel: HeroesViewModel
+    
+    init(heroViewModel: HeroesViewModel) {
+        self.heroViewModel = heroViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private lazy var backgroundScreen: UIView = {
         let backgroundScreen = UIView()
         backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
@@ -37,9 +48,9 @@ class ViewController: UIViewController {
     
     private lazy var pagingLayout: PagingCollectionViewLayout = {
         let layout = PagingCollectionViewLayout()
-        layout.sectionInset = .init(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumLineSpacing = 0
-        layout.itemSize = .init(width: 10, height: 10)
+        layout.sectionInset = .init(top: 0, left: spacing, bottom: 0, right: spacing)
+        layout.minimumLineSpacing = cellSpacing
+        layout.itemSize = .init(width: cellWidth, height: cellHeight)
         layout.scrollDirection = .horizontal
         return layout
     }()
@@ -99,11 +110,14 @@ class ViewController: UIViewController {
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        heroViewModel.countOfHeroes()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
+        
+        let hero = heroViewModel.dataSource[indexPath.row]
+        cell.configure(with: hero)
         
         return cell
     }

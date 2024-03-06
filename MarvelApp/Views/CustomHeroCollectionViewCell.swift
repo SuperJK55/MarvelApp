@@ -25,6 +25,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         let heroName = UILabel()
         heroName.translatesAutoresizingMaskIntoConstraints = false
         heroName.textColor = .white
+        heroName.font = .systemFont(ofSize: 30, weight: .bold)
         heroName.textAlignment = .left
         return heroName
     }()
