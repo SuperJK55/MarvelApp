@@ -68,6 +68,11 @@ class ViewController: UIViewController {
         
         return collectionView
     }()
+    private lazy var coloredFrame: ColoredFrameView = {
+        let coloredFrame = ColoredFrameView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIScreen.main.bounds.width, height: cellHeight + 50))
+        coloredFrame.translatesAutoresizingMaskIntoConstraints = false
+        return coloredFrame
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +88,8 @@ class ViewController: UIViewController {
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
         }
+        
+        backgroundScreen.addSubview(coloredFrame)
         
         backgroundScreen.addSubview(marvelLogo)
         marvelLogo.snp.makeConstraints{ (make) -> Void in
@@ -120,5 +127,24 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.configure(with: hero)
         
         return cell
+    }
+}
+
+class ColoredFrameView: UIView {
+    
+    override func draw(_ rect: CGRect) {
+        drawTriangle()
+    }
+    
+    func drawTriangle() {
+        let trianglePath = UIBezierPath()
+        trianglePath.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
+        trianglePath.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
+        trianglePath.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
+        
+        let fillColor = UIColor(.red)
+        fillColor.setFill()
+        trianglePath.fill()
+        trianglePath.stroke()
     }
 }
