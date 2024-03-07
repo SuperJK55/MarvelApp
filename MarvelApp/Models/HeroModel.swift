@@ -6,23 +6,31 @@
 //
 
 import Foundation
+import UIKit
 
-struct HeroModelList: Codable{
+struct HeroModelList{
     let countOfHeroes: Int
     let heroes: [HeroModel]
 }
 
-struct HeroModel: Codable {
+struct HeroModel{
     let name: String
     let image: String
+    let backgroundColor: UIColor
 }
 
 let dataOfHeroes = HeroModelList(
-    countOfHeroes: 3,
+    countOfHeroes: 9,
     heroes: [
-        HeroModel(name: "Iron Man 1", image: "iron-man"),
-        HeroModel(name: "Iron Man 2", image: "iron-man"),
-        HeroModel(name: "Iron Man 3", image: "iron-man")
+        HeroModel(name: "Iron Man", image: "iron-man", backgroundColor: .white),
+        HeroModel(name: "DeadPool", image: "deadpool", backgroundColor: .red),
+        HeroModel(name: "Spider Man", image: "spider-man", backgroundColor: .blue),
+        HeroModel(name: "Iron Man 2", image: "iron-man", backgroundColor: .white),
+        HeroModel(name: "DeadPool 2", image: "deadpool", backgroundColor: .red),
+        HeroModel(name: "Spider Man 2", image: "spider-man", backgroundColor: .blue),
+        HeroModel(name: "Iron Man 3", image: "iron-man", backgroundColor: .white),
+        HeroModel(name: "DeadPool 3", image: "deadpool", backgroundColor: .red),
+        HeroModel(name: "Spider Man 3", image: "spider-man", backgroundColor: .blue)
     ]
 )
 

@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ViewController: UIViewController {
+class MainView: UIViewController {
     
     let heroViewModel: HeroesViewModel
     
@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         return collectionView
     }()
     private lazy var coloredFrame: ColoredFrameView = {
-        let coloredFrame = ColoredFrameView(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIScreen.main.bounds.width, height: cellHeight + 50))
+        let coloredFrame = ColoredFrameView(colorFrame: heroViewModel.dataSource[0].backgroundColor)
         coloredFrame.translatesAutoresizingMaskIntoConstraints = false
         return coloredFrame
     }()
@@ -90,6 +90,7 @@ class ViewController: UIViewController {
         }
         
         backgroundScreen.addSubview(coloredFrame)
+        coloredFrame.backgroundColor = .clear
         
         backgroundScreen.addSubview(marvelLogo)
         marvelLogo.snp.makeConstraints{ (make) -> Void in
@@ -115,7 +116,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         heroViewModel.countOfHeroes()
     }
@@ -124,6 +125,8 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
         let hero = heroViewModel.dataSource[indexPath.row]
+        coloredFrame.colorFrame = hero.backgroundColor
+        coloredFrame.setNeedsDisplay()
         cell.configure(with: hero)
         
         return cell
@@ -132,19 +135,33 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
 
 class ColoredFrameView: UIView {
     
-    override func draw(_ rect: CGRect) {
-        drawTriangle()
+    var colorFrame: UIColor{
+        didSet{
+            drawTriangle(color: colorFrame)
+        }
     }
     
-    func drawTriangle() {
-        let trianglePath = UIBezierPath()
-        trianglePath.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
-        trianglePath.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
-        trianglePath.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
+    init(colorFrame: UIColor) {
+        self.colorFrame = colorFrame
+        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIScreen.main.bounds.width, height: cellHeight + 50))
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    override func draw(_ rect: CGRect) {
+        drawTriangle(color: colorFrame)
+    }
+    
+    func drawTriangle(color: UIColor) {
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
+        path.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
+        path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
         
-        let fillColor = UIColor(.red)
+        let fillColor = color
         fillColor.setFill()
-        trianglePath.fill()
-        trianglePath.stroke()
+        path.fill()
+        path.stroke()
     }
 }

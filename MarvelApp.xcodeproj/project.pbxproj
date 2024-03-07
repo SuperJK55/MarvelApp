@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5789478E2B98E78A003573CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478D2B98E78A003573CE /* AppDelegate.swift */; };
 		578947902B98E78A003573CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478F2B98E78A003573CE /* SceneDelegate.swift */; };
-		578947922B98E78A003573CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947912B98E78A003573CE /* ViewController.swift */; };
+		578947922B98E78A003573CE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947912B98E78A003573CE /* MainView.swift */; };
 		578947972B98E78C003573CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578947962B98E78C003573CE /* Assets.xcassets */; };
 		5789479A2B98E78C003573CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 578947982B98E78C003573CE /* LaunchScreen.storyboard */; };
 		578947A32B98E8FC003573CE /* PagingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947A22B98E8FC003573CE /* PagingCollectionViewLayout.swift */; };
@@ -23,7 +23,7 @@
 		5789478A2B98E78A003573CE /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5789478D2B98E78A003573CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5789478F2B98E78A003573CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		578947912B98E78A003573CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		578947912B98E78A003573CE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		578947962B98E78C003573CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		578947992B98E78C003573CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5789479B2B98E78C003573CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -83,7 +83,6 @@
 				578947A12B98E8CF003573CE /* Layouts */,
 				5789478D2B98E78A003573CE /* AppDelegate.swift */,
 				5789478F2B98E78A003573CE /* SceneDelegate.swift */,
-				578947912B98E78A003573CE /* ViewController.swift */,
 				578947962B98E78C003573CE /* Assets.xcassets */,
 				578947982B98E78C003573CE /* LaunchScreen.storyboard */,
 				5789479B2B98E78C003573CE /* Info.plist */,
@@ -102,6 +101,7 @@
 		578947A42B98F4CE003573CE /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				578947912B98E78A003573CE /* MainView.swift */,
 				578947A52B98F4F6003573CE /* CustomHeroCollectionViewCell.swift */,
 			);
 			path = Views;
@@ -248,7 +248,7 @@
 			files = (
 				578947AC2B99025B003573CE /* Constant.swift in Sources */,
 				578947A32B98E8FC003573CE /* PagingCollectionViewLayout.swift in Sources */,
-				578947922B98E78A003573CE /* ViewController.swift in Sources */,
+				578947922B98E78A003573CE /* MainView.swift in Sources */,
 				5789478E2B98E78A003573CE /* AppDelegate.swift in Sources */,
 				578947A62B98F4F6003573CE /* CustomHeroCollectionViewCell.swift in Sources */,
 				578947902B98E78A003573CE /* SceneDelegate.swift in Sources */,
