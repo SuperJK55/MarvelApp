@@ -8,10 +8,12 @@ import UIKit
 
 class InfoAboutHeroesViewController: UIViewController {
     
+    let viewModel: InfoHeroViewModel
     var heroModel: HeroModel
     
     init(hero: HeroModel) {
         self.heroModel = hero
+        self.viewModel = InfoHeroViewModel(hero: hero)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,7 +57,7 @@ class InfoAboutHeroesViewController: UIViewController {
     }
     
     private func setupView() {
-        heroImage.image = UIImage(named: heroModel.image)
+        viewModel.loadImageFromURL(imageView: heroImage)
         heroName.text = heroModel.name
         heroInfo.text = heroModel.infoAboutHero
         

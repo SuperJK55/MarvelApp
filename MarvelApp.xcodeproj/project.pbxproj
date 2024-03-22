@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79A2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift */; };
+		5759E79D2BADF539006C3C66 /* InfoHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79C2BADF539006C3C66 /* InfoHeroViewModel.swift */; };
 		5789478E2B98E78A003573CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478D2B98E78A003573CE /* AppDelegate.swift */; };
 		578947902B98E78A003573CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478F2B98E78A003573CE /* SceneDelegate.swift */; };
 		578947922B98E78A003573CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947912B98E78A003573CE /* MainViewController.swift */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		5759E79A2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAboutHeroesViewController.swift; sourceTree = "<group>"; };
+		5759E79C2BADF539006C3C66 /* InfoHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHeroViewModel.swift; sourceTree = "<group>"; };
 		5789478A2B98E78A003573CE /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5789478D2B98E78A003573CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5789478F2B98E78A003573CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				578947A52B98F4F6003573CE /* CustomHeroCollectionViewCell.swift */,
+				5759E79C2BADF539006C3C66 /* InfoHeroViewModel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				578947AC2B99025B003573CE /* Constant.swift in Sources */,
+				5759E79D2BADF539006C3C66 /* InfoHeroViewModel.swift in Sources */,
 				578947A32B98E8FC003573CE /* PagingCollectionViewLayout.swift in Sources */,
 				5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */,
 				578947922B98E78A003573CE /* MainViewController.swift in Sources */,
