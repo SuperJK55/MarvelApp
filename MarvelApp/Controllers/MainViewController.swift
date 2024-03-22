@@ -131,6 +131,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return cell
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+                
+        let hero = heroViewModel.dataSource[indexPath.row]
+        let infoAboutHeroesViewController = InfoAboutHeroesViewController(hero: hero)
+        self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
+    }
 }
 
 class ColoredFrameView: UIView {
