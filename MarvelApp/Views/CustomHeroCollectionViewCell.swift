@@ -54,5 +54,6 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         self.imageView.image = nil
+        self.heroNameView.text = nil
     }
 }

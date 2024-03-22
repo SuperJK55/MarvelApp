@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 struct HeroModelList{
-    let countOfHeroes: Int
     let heroes: [HeroModel]
 }
 
@@ -20,7 +19,6 @@ struct HeroModel{
 }
 
 let dataOfHeroes = HeroModelList(
-    countOfHeroes: 9,
     heroes: [
         HeroModel(name: "Iron Man", image: "iron-man", backgroundColor: .white),
         HeroModel(name: "DeadPool", image: "deadpool", backgroundColor: .red),

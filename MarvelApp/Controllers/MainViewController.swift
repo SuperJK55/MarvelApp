@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MainView: UIViewController {
+class MainViewController: UIViewController {
     
     let heroViewModel: HeroesViewModel
     
@@ -60,9 +60,8 @@ class MainView: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
-        collectionView.backgroundColor = .clear
         collectionView.register(CustomHeroCollectionViewCell.self, forCellWithReuseIdentifier: CustomHeroCollectionViewCell.identifier)
-        
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.delegate = self
         
@@ -70,6 +69,7 @@ class MainView: UIViewController {
     }()
     private lazy var coloredFrame: ColoredFrameView = {
         let coloredFrame = ColoredFrameView(colorFrame: heroViewModel.dataSource[0].backgroundColor)
+        coloredFrame.backgroundColor = .clear
         coloredFrame.translatesAutoresizingMaskIntoConstraints = false
         return coloredFrame
     }()
@@ -90,7 +90,6 @@ class MainView: UIViewController {
         }
         
         backgroundScreen.addSubview(coloredFrame)
-        coloredFrame.backgroundColor = .clear
         
         backgroundScreen.addSubview(marvelLogo)
         marvelLogo.snp.makeConstraints{ (make) -> Void in
@@ -116,7 +115,7 @@ class MainView: UIViewController {
     
 }
 
-extension MainView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         heroViewModel.countOfHeroes()
     }
@@ -125,9 +124,10 @@ extension MainView: UICollectionViewDelegate, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
         let hero = heroViewModel.dataSource[indexPath.row]
+        cell.configure(with: hero)
+        
         coloredFrame.colorFrame = hero.backgroundColor
         coloredFrame.setNeedsDisplay()
-        cell.configure(with: hero)
         
         return cell
     }
@@ -143,7 +143,7 @@ class ColoredFrameView: UIView {
     
     init(colorFrame: UIColor) {
         self.colorFrame = colorFrame
-        super.init(frame: CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIScreen.main.bounds.width, height: cellHeight + 50))
+        super.init(frame: SizeTriangle)
     }
     
     required init?(coder: NSCoder) {
