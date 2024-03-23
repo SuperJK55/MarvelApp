@@ -20,8 +20,12 @@ class InfoHeroViewModel {
         
         let url = URL(string: heroItem.urlImage)
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        let indicator = UIActivityIndicatorView()
 
-        imageView.kf.setImage(with: url, options: [.processor(processor)]){ result in
+        imageView.kf.indicatorType = .activity
+        (imageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
+        
+        imageView.kf.setImage(with: url, options: [.processor(processor)] ){ result in
             switch result {
             case .success:
                 print("Load sucesfull")
