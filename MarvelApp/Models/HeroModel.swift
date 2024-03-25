@@ -15,20 +15,23 @@ struct HeroModelList{
 struct HeroModel{
     let name: String
     let image: String
+    let infoAboutHero: String
     let backgroundColor: UIColor
+    let urlImage: String
+    
 }
 
 let dataOfHeroes = HeroModelList(
     heroes: [
-        HeroModel(name: "Iron Man", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man", image: "spider-man", backgroundColor: .blue),
-        HeroModel(name: "Iron Man 2", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool 2", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man 2", image: "spider-man", backgroundColor: .blue),
-        HeroModel(name: "Iron Man 3", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool 3", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man 3", image: "spider-man", backgroundColor: .blue)
+        HeroModel(name: "Iron Man", image: "iron-man", infoAboutHero: "Im Iron Man", backgroundColor: .white, urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool", image: "deadpool", infoAboutHero: "Im DeadPool", backgroundColor: .red, urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man", image: "spider-man", infoAboutHero: "Im Spider Man", backgroundColor: .blue, urlImage: "https://iili.io/JMnuyB9.png"),
+        HeroModel(name: "Iron Man 2", image: "iron-man", infoAboutHero: "Im Iron Man 2", backgroundColor: .white, urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool 2", image: "deadpool", infoAboutHero: "Im DeadPool 2", backgroundColor: .red, urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man 2", image: "spider-man", infoAboutHero: "Im Spider Man 2", backgroundColor: .blue, urlImage: "https://iili.io/JMnuyB9.png"),
+        HeroModel(name: "Iron Man 3", image: "iron-man", infoAboutHero: "Im Iron Man 3", backgroundColor: .white, urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool 3", image: "deadpool", infoAboutHero: "Im DeadPool 3", backgroundColor: .red, urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man 3", image: "spider-man", infoAboutHero: "Im Spider Man 3", backgroundColor: .blue, urlImage: "https://iili.io/JMnuyB9.png")
     ]
 )
 
