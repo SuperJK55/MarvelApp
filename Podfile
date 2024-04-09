@@ -7,4 +7,5 @@ target 'MarvelApp' do
 
   # Pods for MarvelApp
   pod 'SnapKit'
+  pod 'Kingfisher', '~> 7.0'
 end

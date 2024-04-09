@@ -11,8 +11,9 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomHeroCollectionViewCellId"
     
-    private lazy var imageView: UIImageView = {
-       let image = UIImageView()
+    
+    lazy var imageView: UIImageView = {
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "questionmark")
         image.tintColor = .white
@@ -21,7 +22,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    private lazy var heroNameView: UILabel = {
+    lazy var heroNameView: UILabel = {
         let heroName = UILabel()
         heroName.translatesAutoresizingMaskIntoConstraints = false
         heroName.textColor = .white

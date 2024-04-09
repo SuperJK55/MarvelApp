@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     private lazy var coloredFrame: ColoredFrameView = {
-        let coloredFrame = ColoredFrameView(colorFrame: heroViewModel.dataSource[0].backgroundColor)
+        let coloredFrame = ColoredFrameView(colorFrame: UIColor.systemBlue)
         coloredFrame.backgroundColor = .clear
         coloredFrame.translatesAutoresizingMaskIntoConstraints = false
         return coloredFrame
@@ -80,6 +80,8 @@ class MainViewController: UIViewController {
     }
     
     private func setupViewConstraints() {
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         
         view.addSubview(backgroundScreen)
         backgroundScreen.snp.makeConstraints{ (make) -> Void in
@@ -110,9 +112,7 @@ class MainViewController: UIViewController {
             make.width.equalTo(backgroundScreen.snp.width)
             make.bottom.equalTo(backgroundScreen.snp.bottom)
         }
-        
     }
-    
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -126,10 +126,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let hero = heroViewModel.dataSource[indexPath.row]
         cell.configure(with: hero)
         
-        coloredFrame.colorFrame = hero.backgroundColor
+        coloredFrame.colorFrame = cell.imageView.image?.averageColor() ?? UIColor.systemBlue
         coloredFrame.setNeedsDisplay()
         
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let hero = heroViewModel.dataSource[indexPath.row]
+        let infoAboutHeroesViewController = InfoAboutHeroesViewController(hero: hero)
+        self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
     }
 }
 

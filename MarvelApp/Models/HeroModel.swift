@@ -15,20 +15,22 @@ struct HeroModelList{
 struct HeroModel{
     let name: String
     let image: String
-    let backgroundColor: UIColor
+    let infoAboutHero: String
+    let urlImage: String
+    
 }
 
 let dataOfHeroes = HeroModelList(
     heroes: [
-        HeroModel(name: "Iron Man", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man", image: "spider-man", backgroundColor: .blue),
-        HeroModel(name: "Iron Man 2", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool 2", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man 2", image: "spider-man", backgroundColor: .blue),
-        HeroModel(name: "Iron Man 3", image: "iron-man", backgroundColor: .white),
-        HeroModel(name: "DeadPool 3", image: "deadpool", backgroundColor: .red),
-        HeroModel(name: "Spider Man 3", image: "spider-man", backgroundColor: .blue)
+        HeroModel(name: "Iron Man", image: "iron-man", infoAboutHero: "Im Iron Man", urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool", image: "deadpool", infoAboutHero: "Im DeadPool", urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man", image: "spider-man", infoAboutHero: "Im Spider Man", urlImage: "https://iili.io/JMnuyB9.png"),
+        HeroModel(name: "Iron Man 2", image: "iron-man", infoAboutHero: "Im Iron Man 2", urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool 2", image: "deadpool", infoAboutHero: "Im DeadPool 2", urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man 2", image: "spider-man", infoAboutHero: "Im Spider Man 2", urlImage: "https://iili.io/JMnuyB9.png"),
+        HeroModel(name: "Iron Man 3", image: "iron-man", infoAboutHero: "Im Iron Man 3", urlImage: "https://iili.io/JMnuDI2.png"),
+        HeroModel(name: "DeadPool 3", image: "deadpool", infoAboutHero: "Im DeadPool 3", urlImage: "https://iili.io/JMnAfIV.png"),
+        HeroModel(name: "Spider Man 3", image: "spider-man", infoAboutHero: "Im Spider Man 3", urlImage: "https://iili.io/JMnuyB9.png")
     ]
 )
 
