@@ -75,6 +75,7 @@ class MainViewController: UIViewController {
     }()
     
     private func updateData() {
+        LoaderViewModel.loaderActivate()
         heroViewModel.fetchHeroesData() { [weak self] (result) in
             guard let this = self else { return }
             this.resultFromApi(result)
@@ -84,7 +85,9 @@ class MainViewController: UIViewController {
         switch result {
         case .success(let model):
             setupViewConstraints()
+            LoaderViewModel.loaderDeactivate()
         case .failure(let error):
+            LoaderViewModel.loaderDeactivate()
             print(error)
         }
     }

@@ -32,7 +32,6 @@ class InfoAboutHero {
             switch result {
             case .success:
                 print("Load sucesfull")
-                print(url)
                 break
             case .failure(let _error):
                 print("Load Failure")

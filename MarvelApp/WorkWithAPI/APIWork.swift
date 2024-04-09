@@ -57,7 +57,6 @@ final class HeroesViewModel {
         let md5Hash = MD5(string: "\(timeStamp)\(secret_api_key)\(api_key)")
         let path = "https://gateway.marvel.com/v1/public/characters?ts=\(timeStamp)&apikey=\(api_key)&hash=\(md5Hash)"
         let urlString = String(format: path)
-        print(urlString)
         handleRequest(urlString: urlString, completion: completion)
     }
     

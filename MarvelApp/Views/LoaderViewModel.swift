@@ -7,48 +7,44 @@
 
 import UIKit
 
-class LoadingIndicator {
-    static let shared = LoadingIndicator()
+class LoaderViewModel {
     
-    private let overlayView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .black
-        return view
+    static let state = LoaderViewModel()
+    
+    private let backgroundScreen: UIView = {
+        let backgroundScreen = UIView()
+        backgroundScreen.backgroundColor = UIColor(named: "main-color")
+        return backgroundScreen
     }()
     
-    private let activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.color = .red
-        indicator.backgroundColor = .clear
-        return indicator
+    private let loaderIndicator: UIActivityIndicatorView = {
+        let loaderIndicator = UIActivityIndicatorView(style: .large)
+        loaderIndicator.color = .red
+        loaderIndicator.backgroundColor = .clear
+        return loaderIndicator
     }()
     
-    private init() {
-        guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else {
-            return
+    static func loaderActivate() {
+        DispatchQueue.main.async {
+            state.loaderIndicator.startAnimating()
         }
-        let firstWindow = firstScene.windows.first
+    }
+    
+    static func loaderDeactivate() {
+        DispatchQueue.main.async {
+            state.backgroundScreen.isHidden = true
+            state.loaderIndicator.stopAnimating()
+        }
+    }
+    
+    private init() { guard let firstScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        let loaderWindow = firstScene.windows.first
         
-        if let keyWindow = firstWindow {
-            keyWindow.addSubview(overlayView)
-            overlayView.addSubview(activityIndicator)
-            
-            overlayView.frame = keyWindow.bounds
-            activityIndicator.center = overlayView.center
-        }
-    }
-    
-    static func startLoading() {
-        DispatchQueue.main.async {
-            shared.overlayView.isHidden = false
-            shared.activityIndicator.startAnimating()
-        }
-    }
-    
-    static func stopLoading() {
-        DispatchQueue.main.async {
-            shared.overlayView.isHidden = true
-            shared.activityIndicator.stopAnimating()
+        if let keyWindow = loaderWindow {
+            keyWindow.addSubview(backgroundScreen)
+            backgroundScreen.addSubview(loaderIndicator)
+            backgroundScreen.frame = keyWindow.bounds
+            loaderIndicator.center = backgroundScreen.center
         }
     }
 }
