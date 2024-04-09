@@ -8,12 +8,12 @@ import UIKit
 
 class InfoAboutHeroesViewController: UIViewController {
     
-    let viewModel: InfoHeroViewModel
-    var heroModel: HeroModel
+    let viewModel: InfoAboutHero
+    let heroModel: HeroModel
     
     init(hero: HeroModel) {
         self.heroModel = hero
-        self.viewModel = InfoHeroViewModel(hero: hero)
+        self.viewModel = InfoAboutHero(hero: hero)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,7 +27,7 @@ class InfoAboutHeroesViewController: UIViewController {
         backgroundScreen.backgroundColor = UIColor(named: "main-color")
         return backgroundScreen
     }()
-
+    
     private lazy var heroImage: UIImageView = {
         let heroImage = UIImageView()
         heroImage.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +50,23 @@ class InfoAboutHeroesViewController: UIViewController {
         heroInfo.font = .systemFont(ofSize: 40, weight: .bold)
         return heroInfo
     }()
+    
+    private lazy var backButton: UIButton = {
+        var configuration = UIButton.Configuration.plain()
+        configuration.image = UIImage(systemName: "arrow.left")
+        configuration.baseForegroundColor = .white
+        configuration.buttonSize = .large
+        
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 15, bottom: 15, trailing: 15)
+        
+        let button = UIButton(configuration: configuration)
+        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func backButtonPressed() {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     override func loadView() {
         super.loadView()
@@ -77,6 +94,11 @@ class InfoAboutHeroesViewController: UIViewController {
             make.trailing.equalTo(backgroundScreen.snp.trailing)
         }
         
+        backgroundScreen.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.equalTo(self.backgroundScreen.snp.top).offset(50)
+            make.leading.equalTo(self.backgroundScreen.snp.leading).offset(5)
+        }
         
         backgroundScreen.addSubview(heroInfo)
         heroInfo.snp.makeConstraints { make in

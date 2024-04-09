@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class InfoHeroViewModel {
+class InfoAboutHero {
     
     let heroItem: HeroModel
     
@@ -21,7 +21,7 @@ class InfoHeroViewModel {
         let url = URL(string: heroItem.urlImage)
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
         let indicator = UIActivityIndicatorView()
-
+        
         imageView.kf.indicatorType = .activity
         (imageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
         
