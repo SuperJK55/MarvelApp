@@ -8,43 +8,30 @@
 import Foundation
 import UIKit
 
-struct HeroModelList{
-    let heroes: [HeroModel]
+struct HeroData: Codable{
+    let code: Int
+    let status: String
+    let data: HeroList
 }
 
-struct HeroModel{
+struct HeroList: Codable{
+    let offset: Int
+    let limit: Int
+    let total: Int
+    let count: Int
+    let results: [HeroModel]
+}
+
+struct HeroModel: Codable{
+    let id: Int
     let name: String
-    let image: String
-    let infoAboutHero: String
-    let urlImage: String
-    
+    let description: String
+    let thumbnail: ThumbnailModel
 }
 
-let dataOfHeroes = HeroModelList(
-    heroes: [
-        HeroModel(name: "Iron Man", image: "iron-man", infoAboutHero: "Im Iron Man", urlImage: "https://iili.io/JMnuDI2.png"),
-        HeroModel(name: "DeadPool", image: "deadpool", infoAboutHero: "Im DeadPool", urlImage: "https://iili.io/JMnAfIV.png"),
-        HeroModel(name: "Spider Man", image: "spider-man", infoAboutHero: "Im Spider Man", urlImage: "https://iili.io/JMnuyB9.png"),
-        HeroModel(name: "Iron Man 2", image: "iron-man", infoAboutHero: "Im Iron Man 2", urlImage: "https://iili.io/JMnuDI2.png"),
-        HeroModel(name: "DeadPool 2", image: "deadpool", infoAboutHero: "Im DeadPool 2", urlImage: "https://iili.io/JMnAfIV.png"),
-        HeroModel(name: "Spider Man 2", image: "spider-man", infoAboutHero: "Im Spider Man 2", urlImage: "https://iili.io/JMnuyB9.png"),
-        HeroModel(name: "Iron Man 3", image: "iron-man", infoAboutHero: "Im Iron Man 3", urlImage: "https://iili.io/JMnuDI2.png"),
-        HeroModel(name: "DeadPool 3", image: "deadpool", infoAboutHero: "Im DeadPool 3", urlImage: "https://iili.io/JMnAfIV.png"),
-        HeroModel(name: "Spider Man 3", image: "spider-man", infoAboutHero: "Im Spider Man 3", urlImage: "https://iili.io/JMnuyB9.png")
-    ]
-)
-
-class HeroesViewModel {
-    var dataSource: [HeroModel] = []
-    
-    init() {
-        updateDataSource()
-    }
-    
-    func updateDataSource() {
-        self.dataSource = dataOfHeroes.heroes
-    }
-    func countOfHeroes() -> Int {
-        dataSource.count
-    }
+struct ThumbnailModel: Codable {
+    let path: String
+    let `extension`: String
 }
+
+

@@ -10,15 +10,18 @@ import Kingfisher
 
 class InfoAboutHero {
     
-    let heroItem: HeroModel
+    let heroName: String
+    var heroImageUrlString: String
     
     init(hero: HeroModel) {
-        self.heroItem = hero
+        self.heroName = hero.name
+        self.heroImageUrlString = "\(hero.thumbnail.path).\(hero.thumbnail.extension)"
     }
     
     func loadImageFromURL(imageView: UIImageView) {
         
-        let url = URL(string: heroItem.urlImage)
+        heroImageUrlString.insert(contentsOf: "s", at: heroImageUrlString.index(heroImageUrlString.startIndex, offsetBy: 4))
+        let url = URL(string: heroImageUrlString)
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
         let indicator = UIActivityIndicatorView()
         
@@ -29,11 +32,10 @@ class InfoAboutHero {
             switch result {
             case .success:
                 print("Load sucesfull")
+                print(url)
                 break
             case .failure(let _error):
-                if let image = UIImage(named: self.heroItem.image) {
-                    imageView.image = image
-                }
+                print("Load Failure")
                 break
             }
         }

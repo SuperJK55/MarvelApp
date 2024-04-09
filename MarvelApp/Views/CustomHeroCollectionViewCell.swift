@@ -11,8 +11,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomHeroCollectionViewCellId"
     
-    
-    lazy var imageView: UIImageView = {
+    lazy var heroImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "questionmark")
@@ -22,24 +21,25 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         return image
     }()
     
-    lazy var heroNameView: UILabel = {
+    private lazy var heroNameView: UILabel = {
         let heroName = UILabel()
         heroName.translatesAutoresizingMaskIntoConstraints = false
         heroName.textColor = .white
         heroName.font = .systemFont(ofSize: 30, weight: .bold)
         heroName.textAlignment = .left
+        heroName.numberOfLines = 2
         return heroName
     }()
     
-    public func configure(with hero: HeroModel){
-        self.imageView.image = UIImage(named: hero.image)
-        self.heroNameView.text = hero.name
+    public func configure(viewModel: InfoAboutHero) {
+        self.heroNameView.text = viewModel.heroName
+        viewModel.loadImageFromURL(imageView: heroImageView)
         self.setupViewConstraints()
     }
     
     public func setupViewConstraints(){
-        self.addSubview(imageView)
-        imageView.snp.makeConstraints{ (make) -> Void in
+        self.addSubview(heroImageView)
+        heroImageView.snp.makeConstraints{ (make) -> Void in
             make.top.equalTo(self.snp.top)
             make.width.equalTo(self.snp.width)
             make.bottom.equalTo(self.snp.bottom)
@@ -49,12 +49,13 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         heroNameView.snp.makeConstraints{ (make) -> Void in
             make.bottom.equalTo(self.snp.bottom).offset(-30)
             make.leading.equalTo(self.snp.leading).offset(30)
+            make.trailing.equalTo(self.snp.trailing).offset(-25)
         }
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.imageView.image = nil
+        self.heroImageView.image = nil
         self.heroNameView.text = nil
     }
 }

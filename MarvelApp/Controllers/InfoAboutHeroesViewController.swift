@@ -76,7 +76,7 @@ class InfoAboutHeroesViewController: UIViewController {
     private func setupView() {
         viewModel.loadImageFromURL(imageView: heroImage)
         heroName.text = heroModel.name
-        heroInfo.text = heroModel.infoAboutHero
+        heroInfo.text = "Empty"
         
         view.addSubview(backgroundScreen)
         backgroundScreen.snp.makeConstraints{ (make) -> Void in

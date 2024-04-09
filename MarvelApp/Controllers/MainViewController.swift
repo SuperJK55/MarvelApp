@@ -68,15 +68,30 @@ class MainViewController: UIViewController {
         return collectionView
     }()
     private lazy var coloredFrame: ColoredFrameView = {
-        let coloredFrame = ColoredFrameView(colorFrame: UIColor.systemBlue)
+        let coloredFrame = ColoredFrameView(colorFrame: UIColor.blue)
         coloredFrame.backgroundColor = .clear
         coloredFrame.translatesAutoresizingMaskIntoConstraints = false
         return coloredFrame
     }()
     
+    private func updateData() {
+        heroViewModel.fetchHeroesData() { [weak self] (result) in
+            guard let this = self else { return }
+            this.resultFromApi(result)
+        }
+    }
+    private func resultFromApi(_ result: Result<HeroData, Error>) {
+        switch result {
+        case .success(let model):
+            setupViewConstraints()
+        case .failure(let error):
+            print(error)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewConstraints()
+        updateData()
     }
     
     private func setupViewConstraints() {
@@ -124,9 +139,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
         let hero = heroViewModel.dataSource[indexPath.row]
-        cell.configure(with: hero)
+        cell.configure(viewModel: InfoAboutHero(hero: hero))
         
-        coloredFrame.colorFrame = cell.imageView.image?.averageColor() ?? UIColor.systemBlue
+        coloredFrame.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
+        
         coloredFrame.setNeedsDisplay()
         
         return cell
@@ -138,6 +154,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
     }
 }
+
 
 class ColoredFrameView: UIView {
     
