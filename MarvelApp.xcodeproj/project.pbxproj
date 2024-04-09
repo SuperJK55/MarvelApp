@@ -70,6 +70,14 @@
 			path = ImageExtensions;
 			sourceTree = "<group>";
 		};
+		572830D92BC5B0530003301F /* WorkWithAPI */ = {
+			isa = PBXGroup;
+			children = (
+				5759E79C2BADF539006C3C66 /* InfoAboutHero.swift */,
+			);
+			path = WorkWithAPI;
+			sourceTree = "<group>";
+		};
 		5759E7992BADB2D8006C3C66 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +108,7 @@
 		5789478C2B98E78A003573CE /* MarvelApp */ = {
 			isa = PBXGroup;
 			children = (
+				572830D92BC5B0530003301F /* WorkWithAPI */,
 				572830D62BC589D00003301F /* ImageExtensions */,
 				5759E7992BADB2D8006C3C66 /* Controllers */,
 				578947AA2B990246003573CE /* Constants */,
@@ -127,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				578947A52B98F4F6003573CE /* CustomHeroCollectionViewCell.swift */,
-				5759E79C2BADF539006C3C66 /* InfoAboutHero.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
