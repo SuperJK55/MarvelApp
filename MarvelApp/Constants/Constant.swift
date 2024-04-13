@@ -16,3 +16,5 @@ let SizeTriangle = CGRect(x: 0, y: UIScreen.main.bounds.height * 0.3, width: UIS
 
 let api_key = "0cabb67411dadf3f11a4d1fdccad0dfd"
 let secret_api_key = "8418f99792f34ec58a080e004bed9920264e72f9"
+
+let standart_url = "https://gateway.marvel.com/v1/public/"

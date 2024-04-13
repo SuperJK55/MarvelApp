@@ -7,9 +7,9 @@
 
 import UIKit
 
-class LoaderViewModel {
+class LoaderView {
     
-    static let state = LoaderViewModel()
+    static let state = LoaderView()
     
     private let backgroundScreen: UIView = {
         let backgroundScreen = UIView()

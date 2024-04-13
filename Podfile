@@ -9,4 +9,5 @@ target 'MarvelApp' do
   pod 'SnapKit'
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire'
+  pod 'CollectionViewPagingLayout'
 end

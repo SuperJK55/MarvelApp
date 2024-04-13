@@ -11,7 +11,7 @@ import Kingfisher
 class InfoAboutHero {
     
     let heroName: String
-    var heroImageUrlString: String
+    let heroImageUrlString: String
     
     init(hero: HeroModel) {
         self.heroName = hero.name
@@ -19,11 +19,8 @@ class InfoAboutHero {
     }
     
     func loadImageFromURL(imageView: UIImageView) {
-        
-        heroImageUrlString.insert(contentsOf: "s", at: heroImageUrlString.index(heroImageUrlString.startIndex, offsetBy: 4))
-        let url = URL(string: heroImageUrlString)
+        let url = convertToHTTPS(urlString: heroImageUrlString)
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
-        let indicator = UIActivityIndicatorView()
         
         imageView.kf.indicatorType = .activity
         (imageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
@@ -38,6 +35,20 @@ class InfoAboutHero {
                 break
             }
         }
+    }
+    
+    func convertToHTTPS(urlString: String) -> URL? {
+        guard let url = URL(string: urlString) else {
+
+            return nil
+        }
+        guard url.scheme == "http" else {
+            return url
+        }
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.scheme = "https"
+        
+        return components?.url
     }
 }
 

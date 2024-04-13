@@ -28,7 +28,7 @@ enum HeroError: Error, LocalizedError {
 }
 
 
-final class HeroesViewModel {
+final class APIWork {
     var dataSource: [HeroModel] = []
     let timeStamp = Int(Date().timeIntervalSince1970)
     
@@ -55,7 +55,7 @@ final class HeroesViewModel {
     
     func fetchHeroesData(completion: @escaping (Result<HeroData, Error>) -> Void) {
         let md5Hash = MD5(string: "\(timeStamp)\(secret_api_key)\(api_key)")
-        let path = "https://gateway.marvel.com/v1/public/characters?ts=\(timeStamp)&apikey=\(api_key)&hash=\(md5Hash)"
+        let path = "\(standart_url)characters?ts=\(timeStamp)&apikey=\(api_key)&hash=\(md5Hash)"
         let urlString = String(format: path)
         handleRequest(urlString: urlString, completion: completion)
     }

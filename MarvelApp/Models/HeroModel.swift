@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-struct HeroData: Codable{
+struct HeroData: Codable {
     let code: Int
     let status: String
     let data: HeroList
 }
 
-struct HeroList: Codable{
+struct HeroList: Codable {
     let offset: Int
     let limit: Int
     let total: Int
@@ -22,7 +22,7 @@ struct HeroList: Codable{
     let results: [HeroModel]
 }
 
-struct HeroModel: Codable{
+struct HeroModel: Codable {
     let id: Int
     let name: String
     let description: String

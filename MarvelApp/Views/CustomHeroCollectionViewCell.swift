@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CollectionViewPagingLayout
 
 class CustomHeroCollectionViewCell: UICollectionViewCell {
     
@@ -57,5 +58,23 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         self.heroImageView.image = nil
         self.heroNameView.text = nil
+    }
+}
+
+extension CustomHeroCollectionViewCell: ScaleTransformView{
+    var scaleOptions: ScaleTransformViewOptions{
+        ScaleTransformViewOptions(
+            minScale: 0.6,
+            scaleRatio: 0.4,
+            translationRatio: CGPoint(x: 0.66, y: 0.2),
+            maxTranslationRatio: CGPoint(x: 2, y: 0),
+            keepVerticalSpacingEqual: true,
+            keepHorizontalSpacingEqual: true,
+            scaleCurve: .linear,
+            translationCurve: .linear
+        )
+    }
+    func transform(progress: CGFloat) {
+        applyScaleTransform(progress: progress)
     }
 }
