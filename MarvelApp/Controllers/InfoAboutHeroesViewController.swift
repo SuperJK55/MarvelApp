@@ -31,6 +31,7 @@ class InfoAboutHeroesViewController: UIViewController {
     private lazy var heroImage: UIImageView = {
         let heroImage = UIImageView()
         heroImage.translatesAutoresizingMaskIntoConstraints = false
+        heroImage.contentMode = .scaleAspectFill
         heroImage.clipsToBounds = true
         return heroImage
     }()
@@ -47,7 +48,7 @@ class InfoAboutHeroesViewController: UIViewController {
         let heroInfo = UILabel()
         heroInfo.translatesAutoresizingMaskIntoConstraints = false
         heroInfo.textColor = .white
-        heroInfo.font = .systemFont(ofSize: 40, weight: .bold)
+        heroInfo.font = .systemFont(ofSize: 15, weight: .bold)
         return heroInfo
     }()
     
@@ -76,7 +77,7 @@ class InfoAboutHeroesViewController: UIViewController {
     private func setupView() {
         viewModel.loadImageFromURL(imageView: heroImage)
         heroName.text = heroModel.name
-        heroInfo.text = "Empty"
+        heroInfo.text = heroModel.description == "" ? "Empty" : heroModel.description
         
         view.addSubview(backgroundScreen)
         backgroundScreen.snp.makeConstraints{ (make) -> Void in
