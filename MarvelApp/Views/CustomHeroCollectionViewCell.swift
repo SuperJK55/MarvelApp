@@ -12,11 +12,18 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "CustomHeroCollectionViewCellId"
     
+    private lazy var backgroundScreen: UIView! = {
+        let backgroundScreen = UIView()
+        backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
+        backgroundScreen.backgroundColor = UIColor(named: "main-color")
+        return backgroundScreen
+    }()
+    
     lazy var heroImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "questionmark")
-        image.contentMode = .scaleAspectFill
+        
         image.tintColor = .white
         image.clipsToBounds = true
         image.layer.cornerRadius = 20
@@ -33,25 +40,38 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         return heroName
     }()
     
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        setupViewConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupViewConstraints()
+    }
+    
     public func configure(viewModel: InfoAboutHero) {
         self.heroNameView.text = viewModel.heroName
         viewModel.loadImageFromURL(imageView: heroImageView)
-        self.setupViewConstraints()
     }
     
     public func setupViewConstraints(){
-        self.addSubview(heroImageView)
+        
+        backgroundScreen = UIView(frame: cardFrame)
+        contentView.addSubview(backgroundScreen)
+        
+        backgroundScreen.addSubview(heroImageView)
         heroImageView.snp.makeConstraints{ (make) -> Void in
-            make.top.equalTo(self.snp.top)
-            make.width.equalTo(self.snp.width)
-            make.bottom.equalTo(self.snp.bottom)
+            make.top.equalTo(self.backgroundScreen.snp.top)
+            make.width.equalTo(self.backgroundScreen.snp.width)
+            make.bottom.equalTo(self.backgroundScreen.snp.bottom)
         }
         
-        self.addSubview(heroNameView)
+        backgroundScreen.addSubview(heroNameView)
         heroNameView.snp.makeConstraints{ (make) -> Void in
-            make.bottom.equalTo(self.snp.bottom).offset(-30)
-            make.leading.equalTo(self.snp.leading).offset(30)
-            make.trailing.equalTo(self.snp.trailing).offset(-25)
+            make.bottom.equalTo(self.backgroundScreen.snp.bottom).offset(-30)
+            make.leading.equalTo(self.backgroundScreen.snp.leading).offset(30)
+            make.trailing.equalTo(self.backgroundScreen.snp.trailing).offset(-25)
         }
     }
     
@@ -61,21 +81,8 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         self.heroNameView.text = nil
     }
 }
-
 extension CustomHeroCollectionViewCell: ScaleTransformView{
     var scaleOptions: ScaleTransformViewOptions{
-        ScaleTransformViewOptions(
-            minScale: 0.6,
-            scaleRatio: 0.4,
-            translationRatio: CGPoint(x: 0.66, y: 0.2),
-            maxTranslationRatio: CGPoint(x: 2, y: 0),
-            keepVerticalSpacingEqual: true,
-            keepHorizontalSpacingEqual: true,
-            scaleCurve: .linear,
-            translationCurve: .linear
-        )
-    }
-    func transform(progress: CGFloat) {
-        applyScaleTransform(progress: progress)
+        .layout(.linear)
     }
 }

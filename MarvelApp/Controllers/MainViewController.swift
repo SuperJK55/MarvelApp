@@ -47,12 +47,8 @@ class MainViewController: UIViewController {
         return titleText
     }()
     
-    private lazy var pagingLayout: PagingCollectionViewLayout = {
-        let layout = PagingCollectionViewLayout()
-        layout.sectionInset = .init(top: 0, left: spacing, bottom: 0, right: spacing)
-        layout.minimumLineSpacing = cellSpacing
-        layout.itemSize = .init(width: cellWidth, height: cellHeight)
-        layout.scrollDirection = .horizontal
+    private lazy var pagingLayout: CollectionViewPagingLayout = {
+        let layout = CollectionViewPagingLayout()
         return layout
     }()
     
@@ -61,18 +57,19 @@ class MainViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
+        collectionView.isPagingEnabled = true
         collectionView.register(CustomHeroCollectionViewCell.self, forCellWithReuseIdentifier: CustomHeroCollectionViewCell.identifier)
         collectionView.backgroundColor = .clear
+        collectionView.contentSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         return collectionView
     }()
-    private lazy var coloredFrame: TriangleView = {
-        let coloredFrame = TriangleView(colorFrame: UIColor.clear)
-        coloredFrame.backgroundColor = .clear
-        coloredFrame.translatesAutoresizingMaskIntoConstraints = false
-        return coloredFrame
+    private lazy var triangleView: TriangleView = {
+        let triangleView = TriangleView(colorFrame: UIColor.red)
+        triangleView.backgroundColor = .clear
+        triangleView.translatesAutoresizingMaskIntoConstraints = false
+        return triangleView
     }()
     
     private func updateData() {
@@ -110,7 +107,7 @@ class MainViewController: UIViewController {
             make.trailing.equalTo(self.view.snp.trailing)
         }
         
-        backgroundScreen.addSubview(coloredFrame)
+        backgroundScreen.addSubview(triangleView)
         
         backgroundScreen.addSubview(marvelLogo)
         marvelLogo.snp.makeConstraints{ (make) -> Void in
@@ -145,8 +142,6 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let hero = heroViewModel.dataSource[indexPath.row]
         cell.configure(viewModel: InfoAboutHero(hero: hero))
         
-        coloredFrame.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
-        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -154,6 +149,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let hero = heroViewModel.dataSource[indexPath.row]
         let infoAboutHeroesViewController = InfoAboutHeroesViewController(hero: hero)
         self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
+    }
+}
+
+extension MainViewController {
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let indexPath = IndexPath(item: pagingLayout.currentPage, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CustomHeroCollectionViewCell else { return }
+        triangleView.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
     }
 }
 

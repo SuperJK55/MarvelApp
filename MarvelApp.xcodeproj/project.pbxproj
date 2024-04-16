@@ -18,7 +18,6 @@
 		578947922B98E78A003573CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947912B98E78A003573CE /* MainViewController.swift */; };
 		578947972B98E78C003573CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 578947962B98E78C003573CE /* Assets.xcassets */; };
 		5789479A2B98E78C003573CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 578947982B98E78C003573CE /* LaunchScreen.storyboard */; };
-		578947A32B98E8FC003573CE /* PagingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947A22B98E8FC003573CE /* PagingCollectionViewLayout.swift */; };
 		578947A62B98F4F6003573CE /* CustomHeroCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947A52B98F4F6003573CE /* CustomHeroCollectionViewCell.swift */; };
 		578947A92B98F534003573CE /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947A82B98F534003573CE /* HeroModel.swift */; };
 		578947AC2B99025B003573CE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947AB2B99025B003573CE /* Constant.swift */; };
@@ -40,7 +39,6 @@
 		578947962B98E78C003573CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		578947992B98E78C003573CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5789479B2B98E78C003573CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		578947A22B98E8FC003573CE /* PagingCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		578947A52B98F4F6003573CE /* CustomHeroCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeroCollectionViewCell.swift; sourceTree = "<group>"; };
 		578947A82B98F534003573CE /* HeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
 		578947AB2B99025B003573CE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				578947AA2B990246003573CE /* Constants */,
 				578947A72B98F513003573CE /* Models */,
 				578947A42B98F4CE003573CE /* Views */,
-				578947A12B98E8CF003573CE /* Layouts */,
 				5789478D2B98E78A003573CE /* AppDelegate.swift */,
 				5789478F2B98E78A003573CE /* SceneDelegate.swift */,
 				578947962B98E78C003573CE /* Assets.xcassets */,
@@ -131,14 +128,6 @@
 				5789479B2B98E78C003573CE /* Info.plist */,
 			);
 			path = MarvelApp;
-			sourceTree = "<group>";
-		};
-		578947A12B98E8CF003573CE /* Layouts */ = {
-			isa = PBXGroup;
-			children = (
-				578947A22B98E8FC003573CE /* PagingCollectionViewLayout.swift */,
-			);
-			path = Layouts;
 			sourceTree = "<group>";
 		};
 		578947A42B98F4CE003573CE /* Views */ = {
@@ -296,7 +285,6 @@
 				572830DB2BC5B2820003301F /* APIWork.swift in Sources */,
 				578947AC2B99025B003573CE /* Constant.swift in Sources */,
 				5759E79D2BADF539006C3C66 /* InfoAboutHero.swift in Sources */,
-				578947A32B98E8FC003573CE /* PagingCollectionViewLayout.swift in Sources */,
 				572830D82BC58A0D0003301F /* AverageColorFromImage.swift in Sources */,
 				5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */,
 				578947922B98E78A003573CE /* MainViewController.swift in Sources */,
