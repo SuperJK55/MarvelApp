@@ -7,12 +7,13 @@
 
 import UIKit
 import SnapKit
+import CollectionViewPagingLayout
 
 class MainViewController: UIViewController {
     
-    let heroViewModel: HeroesViewModel
+    let heroViewModel: APIWork
     
-    init(heroViewModel: HeroesViewModel) {
+    init(heroViewModel: APIWork) {
         self.heroViewModel = heroViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -46,12 +47,8 @@ class MainViewController: UIViewController {
         return titleText
     }()
     
-    private lazy var pagingLayout: PagingCollectionViewLayout = {
-        let layout = PagingCollectionViewLayout()
-        layout.sectionInset = .init(top: 0, left: spacing, bottom: 0, right: spacing)
-        layout.minimumLineSpacing = cellSpacing
-        layout.itemSize = .init(width: cellWidth, height: cellHeight)
-        layout.scrollDirection = .horizontal
+    private lazy var pagingLayout: CollectionViewPagingLayout = {
+        let layout = CollectionViewPagingLayout()
         return layout
     }()
     
@@ -60,23 +57,42 @@ class MainViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.decelerationRate = .fast
+        collectionView.isPagingEnabled = true
         collectionView.register(CustomHeroCollectionViewCell.self, forCellWithReuseIdentifier: CustomHeroCollectionViewCell.identifier)
         collectionView.backgroundColor = .clear
+        collectionView.contentSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.dataSource = self
         collectionView.delegate = self
-        
         return collectionView
     }()
-    private lazy var coloredFrame: ColoredFrameView = {
-        let coloredFrame = ColoredFrameView(colorFrame: UIColor.systemBlue)
-        coloredFrame.backgroundColor = .clear
-        coloredFrame.translatesAutoresizingMaskIntoConstraints = false
-        return coloredFrame
+    private lazy var triangleView: TriangleView = {
+        let triangleView = TriangleView(colorFrame: UIColor.red)
+        triangleView.backgroundColor = .clear
+        triangleView.translatesAutoresizingMaskIntoConstraints = false
+        return triangleView
     }()
+    
+    private func updateData() {
+        LoaderView.loaderActivate()
+        heroViewModel.fetchHeroesData() { [weak self] (result) in
+            guard let this = self else { return }
+            this.resultFromApi(result)
+        }
+    }
+    private func resultFromApi(_ result: Result<HeroData, Error>) {
+        switch result {
+        case .success(let model):
+            setupViewConstraints()
+            LoaderView.loaderDeactivate()
+        case .failure(let error):
+            LoaderView.loaderDeactivate()
+            print(error)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewConstraints()
+        updateData()
     }
     
     private func setupViewConstraints() {
@@ -91,7 +107,7 @@ class MainViewController: UIViewController {
             make.trailing.equalTo(self.view.snp.trailing)
         }
         
-        backgroundScreen.addSubview(coloredFrame)
+        backgroundScreen.addSubview(triangleView)
         
         backgroundScreen.addSubview(marvelLogo)
         marvelLogo.snp.makeConstraints{ (make) -> Void in
@@ -124,10 +140,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
         let hero = heroViewModel.dataSource[indexPath.row]
-        cell.configure(with: hero)
-        
-        coloredFrame.colorFrame = cell.imageView.image?.averageColor() ?? UIColor.systemBlue
-        coloredFrame.setNeedsDisplay()
+        cell.configure(viewModel: InfoAboutHero(hero: hero))
         
         return cell
     }
@@ -139,35 +152,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-class ColoredFrameView: UIView {
+extension MainViewController {
     
-    var colorFrame: UIColor{
-        didSet{
-            drawTriangle(color: colorFrame)
-        }
-    }
-    
-    init(colorFrame: UIColor) {
-        self.colorFrame = colorFrame
-        super.init(frame: SizeTriangle)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    override func draw(_ rect: CGRect) {
-        drawTriangle(color: colorFrame)
-    }
-    
-    func drawTriangle(color: UIColor) {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
-        path.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
-        path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
-        
-        let fillColor = color
-        fillColor.setFill()
-        path.fill()
-        path.stroke()
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let indexPath = IndexPath(item: pagingLayout.currentPage, section: 0)
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CustomHeroCollectionViewCell else { return }
+        triangleView.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
     }
 }
+
+
+
+

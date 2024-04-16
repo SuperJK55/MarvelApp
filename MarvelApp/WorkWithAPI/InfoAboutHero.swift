@@ -10,17 +10,17 @@ import Kingfisher
 
 class InfoAboutHero {
     
-    let heroItem: HeroModel
+    let heroName: String
+    let heroImageUrlString: String
     
     init(hero: HeroModel) {
-        self.heroItem = hero
+        self.heroName = hero.name
+        self.heroImageUrlString = "\(hero.thumbnail.path).\(hero.thumbnail.extension)"
     }
     
     func loadImageFromURL(imageView: UIImageView) {
-        
-        let url = URL(string: heroItem.urlImage)
+        let url = convertToHTTPS(urlString: heroImageUrlString)
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
-        let indicator = UIActivityIndicatorView()
         
         imageView.kf.indicatorType = .activity
         (imageView.kf.indicator?.view as? UIActivityIndicatorView)?.color = .white
@@ -31,12 +31,24 @@ class InfoAboutHero {
                 print("Load sucesfull")
                 break
             case .failure(let _error):
-                if let image = UIImage(named: self.heroItem.image) {
-                    imageView.image = image
-                }
+                print("Load Failure")
                 break
             }
         }
+    }
+    
+    func convertToHTTPS(urlString: String) -> URL? {
+        guard let url = URL(string: urlString) else {
+
+            return nil
+        }
+        guard url.scheme == "http" else {
+            return url
+        }
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        components?.scheme = "https"
+        
+        return components?.url
     }
 }
 
