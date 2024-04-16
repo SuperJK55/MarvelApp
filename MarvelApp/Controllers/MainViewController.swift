@@ -47,12 +47,12 @@ class MainViewController: UIViewController {
         return titleText
     }()
     
-    private lazy var pagingLayout: CollectionViewPagingLayout = {
-        let layout = CollectionViewPagingLayout()
-//        layout.sectionInset = .init(top: 0, left: spacing, bottom: 0, right: spacing)
-//        layout.minimumLineSpacing = cellSpacing
-//        layout.itemSize = .init(width: cellWidth, height: cellHeight)
-//        layout.scrollDirection = .horizontal
+    private lazy var pagingLayout: PagingCollectionViewLayout = {
+        let layout = PagingCollectionViewLayout()
+        layout.sectionInset = .init(top: 0, left: spacing, bottom: 0, right: spacing)
+        layout.minimumLineSpacing = cellSpacing
+        layout.itemSize = .init(width: cellWidth, height: cellHeight)
+        layout.scrollDirection = .horizontal
         return layout
     }()
     
@@ -68,9 +68,8 @@ class MainViewController: UIViewController {
         
         return collectionView
     }()
-    private lazy var coloredFrame: ColoredFrameView = {
-        //let coloredFrame = ColoredFrameView(colorFrame: UIColor.systemBlue)
-        let colorFrame = ColoredFrameView(frame: SizeTriangle)
+    private lazy var coloredFrame: TriangleView = {
+        let coloredFrame = TriangleView(colorFrame: UIColor.clear)
         coloredFrame.backgroundColor = .clear
         coloredFrame.translatesAutoresizingMaskIntoConstraints = false
         return coloredFrame
@@ -146,11 +145,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let hero = heroViewModel.dataSource[indexPath.row]
         cell.configure(viewModel: InfoAboutHero(hero: hero))
         
-        //coloredFrame.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
-        
-        //coloredFrame.updateColorFrame(color: cell.heroImageView.image?.averageColor() ?? UIColor.systemRed)
-        
-        //coloredFrame.setNeedsDisplay()
+        coloredFrame.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
         
         return cell
     }
@@ -163,73 +158,5 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 
-//class ColoredFrameView: UIView {
-//    
-//    var colorFrame: UIColor{
-//        didSet{
-//            drawTriangle(color: colorFrame)
-//        }
-//    }
-//    
-//    init(colorFrame: UIColor) {
-//        self.colorFrame = colorFrame
-//        super.init(frame: SizeTriangle)
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//    override func draw(_ rect: CGRect) {
-//        drawTriangle(color: colorFrame)
-//    }
-//    
-//    func drawTriangle(color: UIColor) {
-//        let path = UIBezierPath()
-//        path.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
-//        path.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
-//        path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
-//        
-//        let fillColor = color
-//        fillColor.setFill()
-//        path.fill()
-//        path.stroke()
-//    }
-//}
-class ColoredFrameView: UIView {
-    
-    func updateColorFrame(color: UIColor){
-        frameShapeLayer.backgroundColor = color.cgColor
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupFrameLayer()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private let frameShapeLayer: CAShapeLayer = {
-        let frameLayer = CAShapeLayer()
-        frameLayer.strokeColor = UIColor.clear.cgColor
-        frameLayer.fillColor = UIColor.clear.cgColor
-        return frameLayer
-    }()
-    
-    func setupFrameLayer() {
-        frameShapeLayer.addSublayer(frameShapeLayer)
-        frameShapeLayer.frame = bounds
-        frameShapeLayer.path = drawTriangle().cgPath
-    }
-    
-    func drawTriangle() -> UIBezierPath {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: UIScreen.main.bounds.width, y: cellHeight + 50))
-        path.addLine(to: CGPoint(x: 0, y: cellHeight + 50))
-        path.addLine(to: CGPoint(x: UIScreen.main.bounds.width, y: 0))
-        return path
-    }
-}
 
 
