@@ -53,26 +53,28 @@ final class APIWork {
         }
     }
     
-    func fetchHeroesData(completion: @escaping (Result<HeroData, Error>) -> Void) {
+    func fetchHeroesData(completion: @escaping (Result<[HeroModel], Error>) -> Void) {
         let md5Hash = MD5(string: "\(timeStamp)\(secret_api_key)\(api_key)")
         let path = "\(standart_url)characters?ts=\(timeStamp)&apikey=\(api_key)&hash=\(md5Hash)"
         let urlString = String(format: path)
         handleRequest(urlString: urlString, completion: completion)
     }
     
-    private func handleRequest(urlString: String, completion: @escaping (Result<HeroData, Error>) -> Void) {
+    private func handleRequest(urlString: String, completion: @escaping (Result<[HeroModel], Error>) -> Void) {
         
         AF.request(urlString)
             .validate()
             .responseDecodable(of: HeroData.self, queue: .main, decoder: JSONDecoder()) { (response) in
                 switch response.result {
                 case .success(let heroesData):
-                    let model = heroesData
-                    completion(.success(model))
-                    self.dataSource = model.data.results
+                    let heroes = heroesData.data.results
+                    completion(.success(heroes))
+                    RealmDB.shared.saveHeroes(heroes: heroes)
+                    
+                    self.dataSource = heroes
                 case .failure(let error):
-                    print(error)
-                    print(urlString)
+                    let heroesLocal = RealmDB.shared.getAllHeroes()
+                    completion(.success(heroesLocal))
                     if let err = self.getHeroError(error: error, data: response.data) {
                         completion(.failure(err))
                     } else {
@@ -86,3 +88,5 @@ final class APIWork {
         dataSource.count
     }
 }
+
+

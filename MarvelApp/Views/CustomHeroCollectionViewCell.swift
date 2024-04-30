@@ -23,7 +23,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "questionmark")
-        
+        image.contentMode = .scaleAspectFill
         image.tintColor = .white
         image.clipsToBounds = true
         image.layer.cornerRadius = 20

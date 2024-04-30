@@ -79,7 +79,7 @@ class MainViewController: UIViewController {
             this.resultFromApi(result)
         }
     }
-    private func resultFromApi(_ result: Result<HeroData, Error>) {
+    private func resultFromApi(_ result: Result<[HeroModel], Error>) {
         switch result {
         case .success(let model):
             setupViewConstraints()
