@@ -22,6 +22,7 @@
 		578947A92B98F534003573CE /* HeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947A82B98F534003573CE /* HeroModel.swift */; };
 		578947AC2B99025B003573CE /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947AB2B99025B003573CE /* Constant.swift */; };
 		579356B02BD7F2ED0064B3EB /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579356AF2BD7F2ED0064B3EB /* DataBaseManager.swift */; };
+		57AC333C2BE11331008237CC /* DataBaseObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AC333B2BE11331008237CC /* DataBaseObject.swift */; };
 		57AD82642BCE0EA000EFA4B7 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AD82632BCE0EA000EFA4B7 /* TriangleView.swift */; };
 		F52AFB009A8654FBCF05204C /* Pods_MarvelApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 720D61275AC270813F43EB15 /* Pods_MarvelApp.framework */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		578947A82B98F534003573CE /* HeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroModel.swift; sourceTree = "<group>"; };
 		578947AB2B99025B003573CE /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		579356AF2BD7F2ED0064B3EB /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		57AC333B2BE11331008237CC /* DataBaseObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseObject.swift; sourceTree = "<group>"; };
 		57AD82632BCE0EA000EFA4B7 /* TriangleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		5B2F11EC3EEDECD651681E56 /* Pods-MarvelApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelApp.debug.xcconfig"; path = "Target Support Files/Pods-MarvelApp/Pods-MarvelApp.debug.xcconfig"; sourceTree = "<group>"; };
 		720D61275AC270813F43EB15 /* Pods_MarvelApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				579356AF2BD7F2ED0064B3EB /* DataBaseManager.swift */,
+				57AC333B2BE11331008237CC /* DataBaseObject.swift */,
 			);
 			path = WorkWithDB;
 			sourceTree = "<group>";
@@ -299,6 +302,7 @@
 				572830D82BC58A0D0003301F /* AverageColorFromImage.swift in Sources */,
 				5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */,
 				578947922B98E78A003573CE /* MainViewController.swift in Sources */,
+				57AC333C2BE11331008237CC /* DataBaseObject.swift in Sources */,
 				5789478E2B98E78A003573CE /* AppDelegate.swift in Sources */,
 				572830DD2BC5B8340003301F /* FailureHeroModel.swift in Sources */,
 				579356B02BD7F2ED0064B3EB /* DataBaseManager.swift in Sources */,

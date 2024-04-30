@@ -27,23 +27,11 @@ struct HeroModel: Codable {
     let name: String
     let description: String
     let thumbnail: ThumbnailModel
-    
-    init(id: Int = 0, name: String = "", description: String = "", thumbnail: ThumbnailModel = ThumbnailModel()) {
-        self.id = id
-        self.name = name
-        self.description = description
-        self.thumbnail = thumbnail
-    }
 }
 
 struct ThumbnailModel: Codable {
     let path: String
     let `extension`: String
-    
-    init(path: String = "", `extension`: String = "") {
-        self.path = path
-        self.`extension` = `extension`
-    }
 }
 
 extension HeroModel {
