@@ -35,7 +35,6 @@ struct ThumbnailModel: Codable {
 }
 
 extension HeroModel {
-    
     init(heroObject: HeroObject) {
         self.id = heroObject.id
         self.name = heroObject.name

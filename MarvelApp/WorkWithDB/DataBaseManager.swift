@@ -15,11 +15,11 @@ protocol HeroDataAccessObject {
 
 class RealmDB {
     static let shared = RealmDB()
-    private let realm = try! Realm()
     
     func saveHeroes(heroes: [HeroModel]){
         for item in heroes {
             do {
+                let realm = try Realm()
                 try realm.write {
                     realm.add(HeroObject(heroData: item), update: .all)
                 }
@@ -30,12 +30,19 @@ class RealmDB {
     }
     
     func getAllHeroes() -> [HeroModel] {
-        var heroes: [HeroModel] = []
-        let realmHeroObject = realm.objects(HeroObject.self)
-        
-        for item in realmHeroObject {
-            heroes.append(HeroModel(heroObject: item))
+        do {
+            let realm = try Realm()
+            var heroes: [HeroModel] = []
+            let realmHeroObject = realm.objects(HeroObject.self)
+            
+            for item in realmHeroObject {
+                heroes.append(HeroModel(heroObject: item))
+            }
+            return heroes
+        } catch(let error){
+            print("Failed to get hero: \(error)")
+            return []
         }
-        return heroes
+        
     }
 }
