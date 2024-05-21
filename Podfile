@@ -10,4 +10,5 @@ target 'MarvelApp' do
   pod 'Kingfisher', '~> 7.0'
   pod 'Alamofire'
   pod 'CollectionViewPagingLayout'
+  pod 'RealmSwift'
 end

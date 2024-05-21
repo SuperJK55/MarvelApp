@@ -34,4 +34,20 @@ struct ThumbnailModel: Codable {
     let `extension`: String
 }
 
+extension HeroModel {
+    init(heroObject: HeroObject) {
+        self.id = heroObject.id
+        self.name = heroObject.name
+        self.description = heroObject.description
+        self.thumbnail = ThumbnailModel(thumbnailObject: heroObject.thumbnail!)
+    }
+}
+
+extension ThumbnailModel {
+    init(thumbnailObject: ThumbnailObject) {
+        self.path = thumbnailObject.path
+        self.extension = thumbnailObject.extension
+    }
+}
+
 

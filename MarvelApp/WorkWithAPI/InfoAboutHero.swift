@@ -30,8 +30,9 @@ class InfoAboutHero {
             case .success:
                 print("Load sucesfull")
                 break
-            case .failure(let _error):
+            case .failure(let error):
                 print("Load Failure")
+                print(error)
                 break
             }
         }
@@ -39,7 +40,7 @@ class InfoAboutHero {
     
     func convertToHTTPS(urlString: String) -> URL? {
         guard let url = URL(string: urlString) else {
-
+            
             return nil
         }
         guard url.scheme == "http" else {
