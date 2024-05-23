@@ -74,12 +74,12 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewConstraints()
+        setupView()
         setupBindings()
         heroViewModel.fetchHeroesData()
     }
     
-    private func setupViewConstraints() {
+    private func setupView() {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -141,15 +141,15 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
         let hero = heroViewModel.hero(at: indexPath.row)
-        cell.configure(viewModel: InfoAboutHero(hero: hero))
+        cell.configure(viewModel: InfoAboutHeroViewModel(hero: hero))
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let hero = heroViewModel.hero(at: indexPath.row)
-        let infoAboutHeroesViewController = InfoAboutHeroesViewController(hero: hero)
-        self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
+        let infoAboutHeroViewController = InfoAboutHeroViewController(hero: hero)
+        self.navigationController?.pushViewController(infoAboutHeroViewController, animated: true)
     }
 }
 

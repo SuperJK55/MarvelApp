@@ -50,7 +50,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         setupViewConstraints()
     }
     
-    public func configure(viewModel: InfoAboutHero) {
+    public func configure(viewModel: InfoAboutHeroViewModel) {
         self.heroNameView.text = viewModel.heroName
         viewModel.loadImageFromURL(imageView: heroImageView)
     }

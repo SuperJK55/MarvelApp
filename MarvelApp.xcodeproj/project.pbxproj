@@ -11,8 +11,8 @@
 		572830DB2BC5B2820003301F /* APIWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572830DA2BC5B2820003301F /* APIWork.swift */; };
 		572830DD2BC5B8340003301F /* FailureHeroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572830DC2BC5B8340003301F /* FailureHeroModel.swift */; };
 		572830E12BC5D1D90003301F /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572830E02BC5D1D90003301F /* LoaderView.swift */; };
-		5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79A2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift */; };
-		5759E79D2BADF539006C3C66 /* InfoAboutHero.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79C2BADF539006C3C66 /* InfoAboutHero.swift */; };
+		5759E79B2BADE0C9006C3C66 /* InfoAboutHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79A2BADE0C9006C3C66 /* InfoAboutHeroViewController.swift */; };
+		5759E79D2BADF539006C3C66 /* InfoAboutHeroViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5759E79C2BADF539006C3C66 /* InfoAboutHeroViewModel.swift */; };
 		5789478E2B98E78A003573CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478D2B98E78A003573CE /* AppDelegate.swift */; };
 		578947902B98E78A003573CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5789478F2B98E78A003573CE /* SceneDelegate.swift */; };
 		578947922B98E78A003573CE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578947912B98E78A003573CE /* MainViewController.swift */; };
@@ -33,8 +33,8 @@
 		572830DA2BC5B2820003301F /* APIWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWork.swift; sourceTree = "<group>"; };
 		572830DC2BC5B8340003301F /* FailureHeroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailureHeroModel.swift; sourceTree = "<group>"; };
 		572830E02BC5D1D90003301F /* LoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
-		5759E79A2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAboutHeroesViewController.swift; sourceTree = "<group>"; };
-		5759E79C2BADF539006C3C66 /* InfoAboutHero.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAboutHero.swift; sourceTree = "<group>"; };
+		5759E79A2BADE0C9006C3C66 /* InfoAboutHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAboutHeroViewController.swift; sourceTree = "<group>"; };
+		5759E79C2BADF539006C3C66 /* InfoAboutHeroViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoAboutHeroViewModel.swift; sourceTree = "<group>"; };
 		5789478A2B98E78A003573CE /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5789478D2B98E78A003573CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5789478F2B98E78A003573CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,7 +85,6 @@
 		572830D92BC5B0530003301F /* WorkWithAPI */ = {
 			isa = PBXGroup;
 			children = (
-				5759E79C2BADF539006C3C66 /* InfoAboutHero.swift */,
 				572830DA2BC5B2820003301F /* APIWork.swift */,
 			);
 			path = WorkWithAPI;
@@ -95,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				578947912B98E78A003573CE /* MainViewController.swift */,
-				5759E79A2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift */,
+				5759E79A2BADE0C9006C3C66 /* InfoAboutHeroViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 		5792A2BB2BFD1B6900CEFCCC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				5759E79C2BADF539006C3C66 /* InfoAboutHeroViewModel.swift */,
 				5792A2BC2BFD1B8400CEFCCC /* HeroViewModel.swift */,
 			);
 			path = ViewModels;
@@ -309,9 +309,9 @@
 				572830E12BC5D1D90003301F /* LoaderView.swift in Sources */,
 				572830DB2BC5B2820003301F /* APIWork.swift in Sources */,
 				578947AC2B99025B003573CE /* Constant.swift in Sources */,
-				5759E79D2BADF539006C3C66 /* InfoAboutHero.swift in Sources */,
+				5759E79D2BADF539006C3C66 /* InfoAboutHeroViewModel.swift in Sources */,
 				572830D82BC58A0D0003301F /* AverageColorFromImage.swift in Sources */,
-				5759E79B2BADE0C9006C3C66 /* InfoAboutHeroesViewController.swift in Sources */,
+				5759E79B2BADE0C9006C3C66 /* InfoAboutHeroViewController.swift in Sources */,
 				578947922B98E78A003573CE /* MainViewController.swift in Sources */,
 				5792A2BD2BFD1B8400CEFCCC /* HeroViewModel.swift in Sources */,
 				57AC333C2BE11331008237CC /* DataBaseObject.swift in Sources */,
