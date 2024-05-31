@@ -124,12 +124,13 @@ class MainViewController: UIViewController {
         heroViewModel.onError = { error in
             DispatchQueue.main.async {
                 LoaderView.loaderDeactivate()
-                print(error)
+                self.presentErrorAlert(error: error)
             }
         }
         
         LoaderView.loaderActivate()
     }
+    
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -159,6 +160,14 @@ extension MainViewController {
         let indexPath = IndexPath(item: pagingLayout.currentPage, section: 0)
         guard let cell = collectionView.cellForItem(at: indexPath) as? CustomHeroCollectionViewCell else { return }
         triangleView.colorFrame = cell.getHeroesImage()?.averageColor() ?? UIColor.systemRed
+    }
+}
+
+extension MainViewController {
+    func presentErrorAlert(error: Error) {
+        let alertController = UIAlertController(title: "API Error", message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }
 
