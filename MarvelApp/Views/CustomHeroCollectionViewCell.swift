@@ -16,6 +16,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         let backgroundScreen = UIView()
         backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
         backgroundScreen.backgroundColor = UIColor(named: "main-color")
+        backgroundScreen.accessibilityIdentifier = "cardBackgroundScreen"
         return backgroundScreen
     }()
     
@@ -27,6 +28,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         image.tintColor = .white
         image.clipsToBounds = true
         image.layer.cornerRadius = 20
+        image.accessibilityIdentifier = "cardHeroImage"
         return image
     }()
     
@@ -37,6 +39,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         heroName.font = .systemFont(ofSize: 30, weight: .bold)
         heroName.textAlignment = .left
         heroName.numberOfLines = 2
+        heroName.accessibilityIdentifier = "cardHeroName"
         return heroName
     }()
     

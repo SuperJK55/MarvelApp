@@ -28,7 +28,7 @@ enum HeroError: Error, LocalizedError {
 }
 
 
-final class APIWork {
+class APIWork {
     var dataSource: [HeroModel] = []
     let timeStamp = Int(Date().timeIntervalSince1970)
     
