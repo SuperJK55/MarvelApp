@@ -6,30 +6,62 @@
 //
 
 import XCTest
+@testable import MarvelApp
 
 final class MarvelAppTests: XCTestCase {
-
+    
+    var testedImage: UIImage?
+    var avgColor: UIColor!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        try super.setUpWithError()
+        testedImage = UIImage()
     }
-
+    
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        testedImage = nil
+        try super.tearDownWithError()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func testOnRedColor() throws {
+        testedImage = UIImage()
+        testedImage = testedImage?.fromColorToImage(color: UIColor.red)
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.red.toHexString())
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testOnGreenColor() throws {
+        testedImage = UIImage()
+        testedImage = testedImage?.fromColorToImage(color: UIColor.green)
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.green.toHexString())
     }
-
+    
+    func testOnBlueColor() throws {
+        testedImage = UIImage()
+        testedImage = testedImage?.fromColorToImage(color: UIColor.blue)
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.blue.toHexString())
+    }
+    
+    func testOnClearColor() throws {
+        testedImage = UIImage()
+        testedImage = testedImage?.fromColorToImage(color: UIColor.clear)
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.clear.toHexString())
+    }
+    
+    func testOnBlackColor() throws{
+        testedImage = UIImage()
+        testedImage = testedImage?.fromColorToImage(color: UIColor.black)
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.black.toHexString())
+    }
+    
+    func testOnPictureColor() throws {
+        testedImage = UIImage(named: "spider-man")
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), "#64545CFF")
+    }
+    
 }
