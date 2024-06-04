@@ -6,14 +6,12 @@
 
 import UIKit
 
-class InfoAboutHeroesViewController: UIViewController {
+class InfoAboutHeroViewController: UIViewController {
     
-    let viewModel: InfoAboutHero
-    let heroModel: HeroModel
+    let viewModel: InfoAboutHeroViewModel
     
     init(hero: HeroModel) {
-        self.heroModel = hero
-        self.viewModel = InfoAboutHero(hero: hero)
+        self.viewModel = InfoAboutHeroViewModel(hero: hero)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -23,7 +21,6 @@ class InfoAboutHeroesViewController: UIViewController {
     
     private lazy var backgroundScreen: UIView = {
         let backgroundScreen = UIView()
-        backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
         backgroundScreen.backgroundColor = UIColor(named: "main-color")
         return backgroundScreen
     }()
@@ -69,16 +66,21 @@ class InfoAboutHeroesViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
+        updateHeroCard()
+    }
+    
+    private func updateHeroCard() {
+        viewModel.loadImageFromURL(imageView: heroImage)
+        heroName.text = viewModel.heroName
+        heroInfo.text = viewModel.getHero().description == "" ? "Empty" : viewModel.getHero().description
     }
     
     private func setupView() {
-        viewModel.loadImageFromURL(imageView: heroImage)
-        heroName.text = heroModel.name
-        heroInfo.text = heroModel.description == "" ? "Empty" : heroModel.description
         
+        backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(backgroundScreen)
         backgroundScreen.snp.makeConstraints{ (make) -> Void in
             make.top.equalTo(self.view.snp.top)

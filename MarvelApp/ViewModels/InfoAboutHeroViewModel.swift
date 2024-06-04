@@ -8,14 +8,21 @@
 import UIKit
 import Kingfisher
 
-class InfoAboutHero {
+class InfoAboutHeroViewModel {
+    
+    let hero: HeroModel
     
     let heroName: String
     let heroImageUrlString: String
     
     init(hero: HeroModel) {
+        self.hero = hero
         self.heroName = hero.name
         self.heroImageUrlString = "\(hero.thumbnail.path).\(hero.thumbnail.extension)"
+    }
+    
+    public func getHero() -> HeroModel {
+        return self.hero
     }
     
     func loadImageFromURL(imageView: UIImageView) {

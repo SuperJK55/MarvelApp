@@ -11,9 +11,9 @@ import CollectionViewPagingLayout
 
 class MainViewController: UIViewController {
     
-    let heroViewModel: APIWork
+    let heroViewModel: HeroViewModel
     
-    init(heroViewModel: APIWork) {
+    init(heroViewModel: HeroViewModel) {
         self.heroViewModel = heroViewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -72,30 +72,14 @@ class MainViewController: UIViewController {
         return triangleView
     }()
     
-    private func updateData() {
-        LoaderView.loaderActivate()
-        heroViewModel.fetchHeroesData() { [weak self] (result) in
-            guard let this = self else { return }
-            this.resultFromApi(result)
-        }
-    }
-    private func resultFromApi(_ result: Result<[HeroModel], Error>) {
-        switch result {
-        case .success(let model):
-            setupViewConstraints()
-            LoaderView.loaderDeactivate()
-        case .failure(let error):
-            LoaderView.loaderDeactivate()
-            print(error)
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateData()
+        setupView()
+        setupBindings()
+        heroViewModel.fetchHeroesData()
     }
     
-    private func setupViewConstraints() {
+    private func setupView() {
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         
@@ -129,6 +113,24 @@ class MainViewController: UIViewController {
             make.bottom.equalTo(backgroundScreen.snp.bottom)
         }
     }
+    private func setupBindings() {
+        heroViewModel.onDataUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+                LoaderView.loaderDeactivate()
+            }
+        }
+        
+        heroViewModel.onError = { error in
+            DispatchQueue.main.async {
+                LoaderView.loaderDeactivate()
+                self.presentErrorAlert(error: error)
+            }
+        }
+        
+        LoaderView.loaderActivate()
+    }
+    
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -139,16 +141,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomHeroCollectionViewCell.identifier, for: indexPath) as? CustomHeroCollectionViewCell else { return UICollectionViewCell() }
         
-        let hero = heroViewModel.dataSource[indexPath.row]
-        cell.configure(viewModel: InfoAboutHero(hero: hero))
+        let hero = heroViewModel.hero(at: indexPath.row)
+        cell.configure(viewModel: InfoAboutHeroViewModel(hero: hero))
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let hero = heroViewModel.dataSource[indexPath.row]
-        let infoAboutHeroesViewController = InfoAboutHeroesViewController(hero: hero)
-        self.navigationController?.pushViewController(infoAboutHeroesViewController, animated: true)
+        let hero = heroViewModel.hero(at: indexPath.row)
+        let infoAboutHeroViewController = InfoAboutHeroViewController(hero: hero)
+        self.navigationController?.pushViewController(infoAboutHeroViewController, animated: true)
     }
 }
 
@@ -157,7 +159,15 @@ extension MainViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let indexPath = IndexPath(item: pagingLayout.currentPage, section: 0)
         guard let cell = collectionView.cellForItem(at: indexPath) as? CustomHeroCollectionViewCell else { return }
-        triangleView.colorFrame = cell.heroImageView.image?.averageColor() ?? UIColor.systemRed
+        triangleView.colorFrame = cell.getHeroesImage()?.averageColor() ?? UIColor.systemRed
+    }
+}
+
+extension MainViewController {
+    func presentErrorAlert(error: Error) {
+        let alertController = UIAlertController(title: "API Error", message: error.localizedDescription, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }
 

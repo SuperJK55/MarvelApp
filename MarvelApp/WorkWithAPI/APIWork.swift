@@ -84,9 +84,6 @@ final class APIWork {
                 }
             }
     }
-    func countOfHeroes() -> Int {
-        dataSource.count
-    }
 }
 
 

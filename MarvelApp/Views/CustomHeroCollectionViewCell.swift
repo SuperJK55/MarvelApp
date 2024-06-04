@@ -19,7 +19,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         return backgroundScreen
     }()
     
-    lazy var heroImageView: UIImageView = {
+    private lazy var heroImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "questionmark")
@@ -50,7 +50,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         setupViewConstraints()
     }
     
-    public func configure(viewModel: InfoAboutHero) {
+    public func configure(viewModel: InfoAboutHeroViewModel) {
         self.heroNameView.text = viewModel.heroName
         viewModel.loadImageFromURL(imageView: heroImageView)
     }
@@ -79,6 +79,10 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         self.heroImageView.image = nil
         self.heroNameView.text = nil
+    }
+    
+    public func getHeroesImage() -> UIImage?{
+        return heroImageView.image
     }
 }
 extension CustomHeroCollectionViewCell: ScaleTransformView{

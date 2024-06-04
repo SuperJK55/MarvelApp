@@ -21,7 +21,7 @@ class RealmDB {
             do {
                 let realm = try Realm()
                 try realm.write {
-                    realm.add(HeroObject(heroData: item), update: .all)
+                    realm.add(HeroObject(heroData: item), update: .modified)
                 }
             } catch(let error) {
                 print("Failed to save hero: \(error)")
