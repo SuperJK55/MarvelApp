@@ -10,21 +10,27 @@ import XCTest
 final class MarvelAppUITests: XCTestCase {
     
     var app: XCUIApplication!
+    var heroScreen: HeroScreen!
     
     override func setUpWithError() throws {
         continueAfterFailure = false
         app = XCUIApplication()
         app.launchArguments.append("--uitesting")
+        
+        heroScreen = HeroScreen(app: app)
     }
     
     override func tearDownWithError() throws {
         app.terminate()
     }
     
-    func testHeroScreen() {
-        HeroScreen(app: app)
-            .testOnHeroNameList()
-            .testOnCorrectInfoAboutHero()
-            .testOnChangeTriangleColor()
+    func testFirstOnHeroNameList() {
+        heroScreen.testOnHeroNameList()
+    }
+    func testSecondOnCorrectInfoAboutHero() {
+        heroScreen.testOnCorrectInfoAboutHero()
+    }
+    func testThirdOnChangeTriangleColor() {
+        heroScreen.testOnChangeTriangleColor()
     }
 }

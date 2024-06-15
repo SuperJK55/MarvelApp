@@ -39,7 +39,7 @@ class CustomHeroCollectionViewCell: UICollectionViewCell {
         heroName.font = .systemFont(ofSize: 30, weight: .bold)
         heroName.textAlignment = .left
         heroName.numberOfLines = 2
-        heroName.accessibilityIdentifier = "cardHeroName"
+        heroName.accessibilityIdentifier = "cardHeroNameLabel"
         return heroName
     }()
     

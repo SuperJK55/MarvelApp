@@ -58,6 +58,12 @@ final class MarvelAppTests: XCTestCase {
         XCTAssertEqual(avgColor.toHexString(), UIColor.black.toHexString())
     }
     
+    func testOnEmptyImage() throws{
+        testedImage = UIImage()
+        avgColor = testedImage?.averageColor()
+        XCTAssertEqual(avgColor.toHexString(), UIColor.clear.toHexString())
+    }
+    
     func testOnPictureColor() throws {
         testedImage = UIImage(named: "spider-man")
         avgColor = testedImage?.averageColor()

@@ -40,7 +40,7 @@ class InfoAboutHeroViewController: UIViewController {
         heroName.translatesAutoresizingMaskIntoConstraints = false
         heroName.font = .systemFont(ofSize: 40, weight: .bold)
         heroName.textColor = .white
-        heroName.accessibilityIdentifier = "detailedHeroName"
+        heroName.accessibilityIdentifier = "detailedHeroNameLabel"
         return heroName
     }()
     
@@ -49,7 +49,7 @@ class InfoAboutHeroViewController: UIViewController {
         heroInfo.translatesAutoresizingMaskIntoConstraints = false
         heroInfo.textColor = .white
         heroInfo.font = .systemFont(ofSize: 15, weight: .bold)
-        heroInfo.accessibilityIdentifier = "infoAboutHero"
+        heroInfo.accessibilityIdentifier = "infoAboutHeroLabel"
         return heroInfo
     }()
     
