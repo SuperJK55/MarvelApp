@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
         let backgroundScreen = UIView()
         backgroundScreen.translatesAutoresizingMaskIntoConstraints = false
         backgroundScreen.backgroundColor = UIColor(named: "main-color")
+        backgroundScreen.accessibilityIdentifier = "mainBackgroundScreen"
         return backgroundScreen
     }()
     
@@ -34,6 +35,7 @@ class MainViewController: UIViewController {
         marvelLogo.translatesAutoresizingMaskIntoConstraints = false
         marvelLogo.image = UIImage(named: "marvel-logo")
         marvelLogo.contentMode = .scaleAspectFit
+        marvelLogo.accessibilityIdentifier = "marvelLogo"
         return marvelLogo
     }()
     
@@ -44,6 +46,7 @@ class MainViewController: UIViewController {
         titleText.font = .systemFont(ofSize: 30, weight: .bold)
         titleText.textColor = .white
         titleText.textAlignment = .center
+        titleText.accessibilityIdentifier = "titleText"
         return titleText
     }()
     
@@ -63,12 +66,14 @@ class MainViewController: UIViewController {
         collectionView.contentSize = CGSize(width: cellWidth, height: cellHeight)
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.accessibilityIdentifier = "mainCollectionView"
         return collectionView
     }()
     private lazy var triangleView: TriangleView = {
         let triangleView = TriangleView(colorFrame: UIColor.red)
         triangleView.backgroundColor = .clear
         triangleView.translatesAutoresizingMaskIntoConstraints = false
+        triangleView.accessibilityIdentifier = "backgroundColoredTriangle"
         return triangleView
     }()
     
@@ -155,11 +160,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 }
 
 extension MainViewController {
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let indexPath = IndexPath(item: pagingLayout.currentPage, section: 0)
         guard let cell = collectionView.cellForItem(at: indexPath) as? CustomHeroCollectionViewCell else { return }
         triangleView.colorFrame = cell.getHeroesImage()?.averageColor() ?? UIColor.systemRed
+        triangleView.accessibilityLabel = triangleView.colorFrame.toHexString()
     }
 }
 

@@ -22,6 +22,7 @@ class InfoAboutHeroViewController: UIViewController {
     private lazy var backgroundScreen: UIView = {
         let backgroundScreen = UIView()
         backgroundScreen.backgroundColor = UIColor(named: "main-color")
+        backgroundScreen.accessibilityIdentifier = "infoBackgroundScreen"
         return backgroundScreen
     }()
     
@@ -30,6 +31,7 @@ class InfoAboutHeroViewController: UIViewController {
         heroImage.translatesAutoresizingMaskIntoConstraints = false
         heroImage.contentMode = .scaleAspectFill
         heroImage.clipsToBounds = true
+        heroImage.accessibilityIdentifier = "detailedHeroImage"
         return heroImage
     }()
     
@@ -38,6 +40,7 @@ class InfoAboutHeroViewController: UIViewController {
         heroName.translatesAutoresizingMaskIntoConstraints = false
         heroName.font = .systemFont(ofSize: 40, weight: .bold)
         heroName.textColor = .white
+        heroName.accessibilityIdentifier = "detailedHeroNameLabel"
         return heroName
     }()
     
@@ -46,6 +49,7 @@ class InfoAboutHeroViewController: UIViewController {
         heroInfo.translatesAutoresizingMaskIntoConstraints = false
         heroInfo.textColor = .white
         heroInfo.font = .systemFont(ofSize: 15, weight: .bold)
+        heroInfo.accessibilityIdentifier = "infoAboutHeroLabel"
         return heroInfo
     }()
     
@@ -59,6 +63,7 @@ class InfoAboutHeroViewController: UIViewController {
         
         let button = UIButton(configuration: configuration)
         button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        button.accessibilityIdentifier = "backOnMainScreenButton"
         return button
     }()
     
